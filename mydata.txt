@@ -1,0 +1,6 @@
+This is the first line we wanted to print
+There will be a empty line after this 2nd line
+
+This is the 3rd line we wanted to print
+		This line has 2 tabs
+This is the last line, theres a backslash n at the end of this one
