@@ -7,38 +7,36 @@ void consumer(){
 	char turn;
 	char data;
 
-	int counter = 0;
-
 	while(1){
-		counter++;
+
 		FILE *t;	
 		FILE *d;
 		// Checking who's turn it is
 		while((t = fopen("TURN.txt", "r")) == NULL); // busy loop
 		turn = fgetc(t);
-		//printf("consumer has read %c from TURN.txt\n", turn);
-		if(turn == 'e'){
-				//fclose(d);
+		
+		if(turn == 'e'){ //if DATA.txt is empty, exit the main loop
+				
 				d = NULL;
 				fclose(t);
 				t = NULL;
-				//printf("reached the end before the error consumer %d\n", counter);
-				break; //if DATA.txt is empty, exit the main loop
+				
+				break; 
 			}
 
 		if(turn == '1'){ // waiting until TURN is  1, ie consumer's turn
 			while((d = fopen("DATA.txt", "r")) == NULL); // busy loop
 			
 			data = fgetc(d);
-			//printf("consumer has read %c from DATA.txt\n", data);
 			
-			 
+			
+			// printing whats on DATA.txt
 			printf("%c", data);
 			
-			fclose(t);
+			fclose(t); 
 			t = NULL;
 			
-			while(fopen("TURN.txt", "w") == NULL);
+			while(fopen("TURN.txt", "w") == NULL); // setting TURN to 0
 			FILE *newTurn = fopen("TURN.txt", "w");
 			
 			fprintf(newTurn, "0\n");
@@ -47,7 +45,7 @@ void consumer(){
 
 			fclose(d);
 			d = NULL;
-			//printf("reached here before the error consumer %d\n", counter);
+			
 
 
 		}
@@ -57,15 +55,8 @@ void consumer(){
 		}
 		
 		
-
-		
-		
-
-
-
 	}
 
-	//printf("finally exited the loop Consumer at %d\n", counter);
 
 	
 }

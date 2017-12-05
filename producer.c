@@ -19,12 +19,11 @@ void producer(){
 		FILE *d;
 		
 		// Checking who's turn it is
-		while(fopen("TURN.txt", "r") == NULL); // busy loop
+		while(fopen("TURN.txt", "r") == NULL); // 
 		t = fopen("TURN.txt", "r");
 		turn = fgetc(t);
-		//printf("Producer read %c from TURN.txt", turn);
 
-		if(turn == '0'){
+		if(turn == '0'){ // if producer's turn
 			
 			text = fgetc(mydata);
 			//printf("Producer read %c from mydata.txt\n", text );
@@ -34,7 +33,7 @@ void producer(){
 			while((t = fopen("TURN.txt", "w")) == NULL);
 			while((d = fopen("DATA.txt", "w")) == NULL);
 
-			if(feof(mydata)){
+			if(feof(mydata)){ //if reached end of mydata.txt, will signal this in TURN for consumer
 				fprintf(t, "e\n");
 				fclose(t);
 				fclose(d);
@@ -46,27 +45,20 @@ void producer(){
 			}
 
 
-			fprintf(d, "%c\n", text);
-			fprintf(t, "1\n");
+			fprintf(d, "%c\n", text); //writing to DATA.txt
+			fprintf(t, "1\n"); // writing to TURN.txt
 
 			fclose(d);
 			d = NULL;
 
 		}
-
-
-
-
 		
 		if(t!= NULL){
 			fclose(t);
 		}
-		//printf("reached here before the error producer %d\n", counter);
+	
 	}
 
-	//printf("finally exited the loop Producer at %d\n", counter);
 
-
-	//fclose(mydata);
 
 }
