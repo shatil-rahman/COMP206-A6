@@ -17,18 +17,18 @@ int main(){
 
 	FILE *turn = fopen("TURN.txt", "w");
 
-	fprintf(turn, "0");
+	fprintf(turn, "0\n");
 
 	fclose(turn);
 
 	if(pid == 0){
 		consumer();
-		//wait();
+		wait(NULL);
 	}
 
 	if(pid != 0){
 		producer();
-		wait(&status);
+		wait(NULL);
 	}
 
 
